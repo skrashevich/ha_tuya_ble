@@ -18,30 +18,30 @@ from homeassistant.components.bluetooth import (
     BluetoothServiceInfoBleak,
     async_discovered_service_info,
 )
-from homeassistant.const import CONF_ADDRESS
-from homeassistant.core import callback
-from homeassistant.data_entry_flow import FlowHandler, FlowResult
-
-from homeassistant.components.tuya.const import (
-    CONF_ACCESS_ID,
-    CONF_ACCESS_SECRET,
-    CONF_APP_TYPE,
-    CONF_AUTH_TYPE,
+from homeassistant.const import (
+    CONF_ADDRESS, 
+    CONF_DEVICE_ID,
     CONF_COUNTRY_CODE,
-    CONF_ENDPOINT,
     CONF_PASSWORD,
     CONF_USERNAME,
-    SMARTLIFE_APP,
-    TUYA_COUNTRIES,
-    TUYA_RESPONSE_CODE,
-    TUYA_RESPONSE_MSG,
-    TUYA_RESPONSE_SUCCESS,
-    TUYA_SMART_APP,
 )
+from homeassistant.core import callback
+from homeassistant.data_entry_flow import FlowHandler, FlowResult
 
 from .tuya_ble import SERVICE_UUID, TuyaBLEDeviceCredentials
 
 from .const import (
+    TUYA_COUNTRIES,
+    TUYA_SMART_APP,
+    SMARTLIFE_APP,
+    TUYA_RESPONSE_SUCCESS,
+    TUYA_RESPONSE_CODE,
+    TUYA_RESPONSE_MSG,
+    CONF_ACCESS_ID,
+    CONF_ACCESS_SECRET,
+    CONF_APP_TYPE,
+    CONF_AUTH_TYPE,
+    CONF_ENDPOINT,
     DOMAIN,
 )
 from .devices import TuyaBLEData, get_device_readable_name

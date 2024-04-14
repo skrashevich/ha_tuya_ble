@@ -10,7 +10,7 @@ _Inspired by code of [@redphx](https://github.com/redphx/poc-tuya-ble-fingerbot)
 
 Place the `custom_components` folder in your configuration directory (or add its contents to an existing `custom_components` folder). Alternatively install via [HACS](https://hacs.xyz/).
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=PlusPlus-ua&repository=ha_tuya_ble&category=integration)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=airy10&repository=ha_tuya_ble&category=integration)
 
 ## Usage
 
@@ -36,8 +36,9 @@ The integration works locally, but connection to Tuya BLE device requires device
 * CO2 sensors (category_id 'co2bj')
   + CO2 Detector (product_id '59s19z5m').
 
-* Smart Locks (category_id 'ms')
+* Smart Locks (category_id 'ms', 'jtmspro')
   + Smart Lock (product_id 'ludzroix', 'isk2p555').
+  + Raybuke K7 Pro+ (product_id 'xicdxood'), supports ble unlock and other small features.
 
 * Climate (category_id 'wk')
   + Thermostatic Radiator Valve (product_ids 'drlajpqc', 'nhj2j7su').
@@ -47,6 +48,11 @@ The integration works locally, but connection to Tuya BLE device requires device
 
 * Irrigation computer (category_id 'ggq')
   + Irrigation computer (product_id '6pahkcau')
+
+* Lights
+  + Most BLE light products should be supported as the Light class tries to get device description from the cloud when there are added but only Strip Lights (category_id 'dd') Magiacous RGB light bar (product_id 'nvfrtxlq') has has been tested
+    
+    *Note that some light products are using Bluetooth Mesh protocols and not BLE and so aren't compatible with this integration. That's probably the case if your product isn't at least found (even if non-working) by this integration*
 
 ## Support project
 

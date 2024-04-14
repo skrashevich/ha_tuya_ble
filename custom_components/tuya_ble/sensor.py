@@ -17,10 +17,9 @@ from homeassistant.const import (
     CONCENTRATION_PARTS_PER_MILLION,
     PERCENTAGE,
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
-    TEMP_CELSIUS,
-    VOLUME_MILLILITERS,
     UnitOfTemperature,
-    UnitOfTime
+    UnitOfTime,
+    UnitOfVolume,
 )
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import EntityCategory
@@ -168,6 +167,59 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
             ),
         }
     ),
+    "jtmspro": TuyaBLECategorySensorMapping(
+        products={
+            "xicdxood":  # Raycube K7 Pro+
+            [
+                TuyaBLESensorMapping(
+                    dp_id=21, # Requires more testing
+                    description=SensorEntityDescription(
+                        key="alarm_lock",
+                        icon="mdi:alarm-light-outline",
+                        device_class=SensorDeviceClass.ENUM,
+                        options=[
+                            "wrong_finger",
+                            "wrong_password",
+                            "wrong_card",
+                            "wrong_face",
+                            "tongue_bad",
+                            "too_hot",
+                            "unclosed_time",
+                            "tongue_not_out",
+                            "pry",
+                            "key_in",
+                            "low_battery",
+                            "power_off",
+                            "shock",
+                            "defense",
+                        ],
+                    ),
+                ),
+                TuyaBLESensorMapping(
+                    dp_id=12, # Retrieve last fingerprint used
+                    description=SensorEntityDescription(
+                        key="unlock_fingerprint",
+                        icon="mdi:fingerprint",
+                    ),
+                ),
+                TuyaBLESensorMapping(
+                    dp_id=15, # Retrieve last card used
+                    description=SensorEntityDescription(
+                        key="unlock_card",
+                        icon="mdi:nfc-variant",
+                    ),
+                ),
+                TuyaBLESensorMapping(
+                    dp_id=13, # Retrieve last code used
+                    description=SensorEntityDescription(
+                        key="unlock_password",
+                        icon="mdi:keyboard-outline",
+                    ),
+                ),
+                TuyaBLEBatteryMapping(dp_id=8),
+            ],
+        }
+    ),
     "szjqr": TuyaBLECategorySensorMapping(
         products={
             **dict.fromkeys(
@@ -272,7 +324,7 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                     description=SensorEntityDescription(
                         key="water_intake",
                         device_class=SensorDeviceClass.WATER,
-                        native_unit_of_measurement=VOLUME_MILLILITERS,
+                        native_unit_of_measurement=UnitOfVolume.MILLILITERS,
                         state_class=SensorStateClass.MEASUREMENT,
                     ),
                 ),
@@ -300,6 +352,23 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                         key="time_left",
                         device_class=SensorDeviceClass.DURATION,
                         native_unit_of_measurement=UnitOfTime.MINUTES,
+                        state_class=SensorStateClass.MEASUREMENT,
+                    ),
+                ),
+            ],
+        },
+    ),
+    "sfkzq": TuyaBLECategorySensorMapping(
+        products={
+            "0axr5s0b": [  # Valve Controller
+                TuyaBLEBatteryMapping(dp_id=7),
+                TuyaBLESensorMapping(
+                    #dp_id=15,
+                    dp_id=11,
+                    description=SensorEntityDescription(
+                        key="time_left",
+                        device_class=SensorDeviceClass.DURATION,
+                        native_unit_of_measurement=UnitOfTime.SECONDS,
                         state_class=SensorStateClass.MEASUREMENT,
                     ),
                 ),
